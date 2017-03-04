@@ -21,12 +21,13 @@ app.use(morgan('dev'));
 /*
  * API ROUTES:
  */
+var apiRouter = express.Router();
 
-app.get('/', function(req, res) {
+apiRoutes.get('/', function(req, res) {
     res.send('Hello! The API is at http://localhost:' + port + '/api');
 });
 
-app.get('/setup', function(req, res) {
+apiRoutes.get('/setup', function(req, res) {
 
     // create sample user
     var nick = new User({
@@ -45,6 +46,16 @@ app.get('/setup', function(req, res) {
 
 });
 
+api.Routes.get('/users', function(req, res) {
+    
+    User.find({}, function(err, users) {
+        res.json(users);
+    })
+
+});
+
+app.use('/api', apiRoutes);
+
 
 /* 
  * POST https://localhost:8080/api/authenticate
@@ -61,5 +72,5 @@ app.get('/setup', function(req, res) {
  * List all users. Protected, requires token
  */
 
-app.listen(port);
+apiRoutes.listen(port);
 console.log('Magic happens at http://localhost:' + port); 
