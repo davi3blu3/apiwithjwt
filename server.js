@@ -24,34 +24,14 @@ app.use(morgan('dev'));
 var apiRoutes = express.Router();
 
 apiRoutes.get('/', function(req, res) {
-    res.send('Hello! The API is at http://localhost:' + port + '/api');
-});
-
-apiRoutes.get('/setup', function(req, res) {
-
-    // create sample user
-    var nick = new User({
-        name: 'Philip Lee',
-        password: 'password',
-        admin: true
-    });
-
-    // save sample user
-    nick.save(function(err) {
-        if (err) throw err;
-
-        console.log('user save successfully');
-        res.json({ success: true });
-    })
-
+    res.json({ message: 'Welcome to this magically delicious API'});
 });
 
 apiRoutes.get('/users', function(req, res) {
     
     User.find({}, function(err, users) {
         res.json(users);
-    })
-
+    });
 });
 
 app.use('/api', apiRoutes);
