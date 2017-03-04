@@ -21,7 +21,7 @@ app.use(morgan('dev'));
 /*
  * API ROUTES:
  */
-var apiRouter = express.Router();
+var apiRoutes = express.Router();
 
 apiRoutes.get('/', function(req, res) {
     res.send('Hello! The API is at http://localhost:' + port + '/api');
@@ -46,7 +46,7 @@ apiRoutes.get('/setup', function(req, res) {
 
 });
 
-api.Routes.get('/users', function(req, res) {
+apiRoutes.get('/users', function(req, res) {
     
     User.find({}, function(err, users) {
         res.json(users);
@@ -72,5 +72,5 @@ app.use('/api', apiRoutes);
  * List all users. Protected, requires token
  */
 
-apiRoutes.listen(port);
+app.listen(port);
 console.log('Magic happens at http://localhost:' + port); 
