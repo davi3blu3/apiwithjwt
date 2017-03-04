@@ -63,7 +63,7 @@ apiRoutes.post('/authenticate', function(req, res) {
 })
 
 // route middleware to verify token
-api.Routes.use(function(req, res, next) {
+apiRoutes.use(function(req, res, next) {
     // check header or url params for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
