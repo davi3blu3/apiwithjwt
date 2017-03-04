@@ -24,8 +24,28 @@ app.use(morgan('dev'));
 
 app.get('/', function(req, res) {
     res.send('Hello! The API is at http://localhost:' + port + '/api');
-})
- 
+});
+
+app.get('/setup', function(req, res) {
+
+    // create sample user
+    var nick = new User({
+        name: 'Philip Lee',
+        password: 'password',
+        admin: true
+    });
+
+    // save sample user
+    nick.save(function(err) {
+        if (err) throw err;
+
+        console.log('user save successfully');
+        res.json({ success: true });
+    })
+
+});
+
+
 /* 
  * POST https://localhost:8080/api/authenticate
  * Check name & pw against database, provide token if successful.
